@@ -1,3 +1,5 @@
+// Student name: Phan Tan Dat
+// Student ID: 18127078
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -64,7 +66,7 @@ public class RubyController : MonoBehaviour
         
         if(Input.GetKeyDown(KeyCode.C))
         {
-            Launch();
+            LaunchCog();
         }
         if (Input.GetKeyDown(KeyCode.X))
         {
@@ -111,7 +113,7 @@ public class RubyController : MonoBehaviour
         UIHealthBar.instance.SetValue(currentHealth / (float)maxHealth);
     }
     
-    void Launch()
+    void LaunchCog()
     {
         GameObject projectileObject = Instantiate(projectilePrefab, rigidbody2d.position + Vector2.up * 0.5f, Quaternion.identity);
         Projectile projectile = projectileObject.GetComponent<Projectile>();
