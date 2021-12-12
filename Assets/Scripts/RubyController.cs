@@ -24,6 +24,8 @@ public class RubyController : MonoBehaviour
     Animator animator;
     Vector2 lookDirection = new Vector2(1,0);
     
+    public ParticleSystem healthEffect;
+    public ParticleSystem hitEffect;
     // Start is called before the first frame update
     void Start()
     {
@@ -83,8 +85,12 @@ public class RubyController : MonoBehaviour
             
             isInvincible = true;
             invincibleTimer = timeInvincible;
+            Instantiate(hitEffect, GetComponent<Rigidbody2D>().position + Vector2.up * 1.5f, Quaternion.identity);
         }
-        
+        else if (amount > 0)
+        {
+            Instantiate(healthEffect, GetComponent<Rigidbody2D>().position + Vector2.up * 1.5f, Quaternion.identity);
+        }
         currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
         Debug.Log(currentHealth + "/" + maxHealth);
     }
