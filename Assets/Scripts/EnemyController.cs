@@ -15,12 +15,15 @@ public class EnemyController : MonoBehaviour
     public ParticleSystem smokeEffect;
     Animator animator;
     
+    AudioSource audioSource;
+    public AudioClip robotFixedSound;
     // Start is called before the first frame update
     void Start()
     {
         _rigidbody2D = GetComponent<Rigidbody2D>();
         timer = changeTime;
-        animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();       
+        audioSource= GetComponent<AudioSource>();
     }
 
     void Update()
@@ -83,6 +86,8 @@ public class EnemyController : MonoBehaviour
         _rigidbody2D.simulated = false;
         //optional if you added the fixed animation
         smokeEffect.Stop();
+        audioSource.Stop();
+        audioSource.PlayOneShot(robotFixedSound);
         //Destroy(smokeEffect.gameObject);
         animator.SetTrigger("Fixed");
     }

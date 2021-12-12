@@ -5,9 +5,11 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     Rigidbody2D rigidbody2d;
-    
+    AudioSource audioSource;
+    public AudioClip projectileHitSound1, projectileHitSound2;
     void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         rigidbody2d = GetComponent<Rigidbody2D>();
     }
     
@@ -26,12 +28,21 @@ public class Projectile : MonoBehaviour
     
     void OnCollisionEnter2D(Collision2D other)
     {
+        int rand = Random.Range(0, 1);
+        switch (rand)
+        {
+            case 0:
+                audioSource.PlayOneShot(projectileHitSound1);
+                break;
+            default:
+                audioSource.PlayOneShot(projectileHitSound2);
+                break;
+        }  
         EnemyController e = other.collider.GetComponent<EnemyController>();
         if (e != null)
         {
             e.Fix();
         }
-    
         Destroy(gameObject);
     }
 }
